@@ -29,7 +29,7 @@ const std::string COMMA = ",";
 
 class Chain {
  public:
-  Chain() {}
+  Chain();
   Chain(std::string);
 
   Chain(std::vector<Simbol>);
@@ -78,10 +78,29 @@ class Chain {
   Alfabet alfabet_;
 };
 
+/**
+ * @brief Operator to concatenate two chains.
+ */
 Chain operator*(const Chain& chain_1, const Chain& chain_2);
+
+/**
+ * @brief Operator to compare if two chains are equal.
+ */
 bool operator==(const Chain& chain_1, const Chain& chain_2);
+
+/**
+ * @brief Operator to compare if two chains are not equal.
+ */
 bool operator!=(const Chain& chain_1, const Chain& chain_2);
+
+/**
+ * @brief Operator to compare if the first chain is subchain of the second.
+ */
 bool operator<(const Chain& chain_1, const Chain& chain_2);
+
+/**
+ * @brief Operator to compare if the second chain is subchain of the first.
+ */
 bool operator>(const Chain& chain_1, const Chain& chain_2);
 
 std::ostream& operator<<(std::ostream& output_stream, const Chain& chain);

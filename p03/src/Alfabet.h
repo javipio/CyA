@@ -29,7 +29,7 @@ class Alfabet {
   Alfabet(std::vector<std::string> raw_alfabet);
 
   /**
-   * @brief Checks if a string exists in an alfabet as a simbol.
+   * @brief Checks if a simbol exists in an alfabet.
    */
   bool simbol_exists(const Simbol& needle);
 

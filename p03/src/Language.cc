@@ -30,11 +30,13 @@ const Chain& Language::operator[](int index) const { return language_[index]; }
 std::ostream& operator<<(std::ostream& output_stream,
                          const Language& language) {
   output_stream << "{";
+  // We iterate over every chain of the language adding them to the stream.
   for (int i = 0; i < language.length(); i++) {
     output_stream << language[i].to_string();
+
     if (i + 1 < language.length()) {
       output_stream << COMMA + SPACE;
-    }  // La coma no se pone en el último elemento
+    }  // The comma isn't needed in the last chain.
   }
   output_stream << "}";
   return output_stream;

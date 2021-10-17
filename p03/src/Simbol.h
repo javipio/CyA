@@ -22,6 +22,7 @@
 #define SIMBOL_H
 class Simbol {
  public:
+  Simbol();
   Simbol(std::string value);
   Simbol(char value);
   const std::string get() const;

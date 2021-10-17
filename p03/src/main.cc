@@ -35,20 +35,9 @@ std::vector<Chain> read_file(std::string filename) {
   return chains;
 }
 
-int main(int argc, char* argv[]) {
-  if (argc < 4) {
-    std::cout << "Uso: ./chains input.txt output.txt opcode\n";
-    return 1;
-  }
-
-  const std::string input_filename = argv[1];
-  const std::string output_filename = argv[2];
-  const int opcode = atoi(argv[3]);
-
-  std::vector<Chain> chains = read_file(input_filename);
-
+void write_file(std::string output_filename, int opcode,
+                std::vector<Chain> chains) {
   std::ofstream output_file(output_filename);
-
   std::string aux;
   int n;
 
@@ -108,8 +97,22 @@ int main(int argc, char* argv[]) {
         throw std::invalid_argument("Solo se aceptan OPCODES del 1 al ");
     }
   }
-
   output_file.close();
+}
+
+int main(int argc, char* argv[]) {
+  if (argc < 4) {
+    std::cout << "Uso: ./chains input.txt output.txt opcode\n";
+    return 1;
+  }
+
+  const std::string input_filename = argv[1];
+  const std::string output_filename = argv[2];
+  const int opcode = atoi(argv[3]);
+
+  std::vector<Chain> chains = read_file(input_filename);
+
+  write_file(output_filename, opcode, chains);
 
   return 0;
 }

@@ -20,6 +20,8 @@
 
 #include <iostream>
 
+Simbol::Simbol() = default;
+
 Simbol::Simbol(std::string value) : value_(value){};
 
 Simbol::Simbol(char value) : value_(std::string(1, value)){};

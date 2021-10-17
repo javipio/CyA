@@ -1,3 +1,3 @@
-abbaba > ba
-6793836 != ba
-hola != ba
+{&, abbaba, abbab, abba, abb, ab, a, bbaba, bbab, bba, bb, b, baba, bab, ba, b, aba, ab, a, ba, b, a}
+{&, 6793836, 679383, 67938, 6793, 679, 67, 6, 793836, 79383, 7938, 793, 79, 7, 93836, 9383, 938, 93, 9, 3836, 383, 38, 3, 836, 83, 8, 36, 3, 6}
+{&, hola, hol, ho, h, ola, ol, o, la, l, a}

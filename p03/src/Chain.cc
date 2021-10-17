@@ -24,6 +24,8 @@
 
 const Chain EMPTY_CHAIN = Chain("&");
 
+Chain::Chain() = default;
+
 Chain::Chain(std::string line) {
   std::vector<std::string> alfabeto;
   std::string temp;
@@ -39,12 +41,13 @@ Chain::Chain(std::string line) {
   }
 
   chain = temp;
-
+  // If there is no alfabet it will be extracted from the chain.
   if (alfabeto.size() == 0) {
     for (const auto& character : temp) {
       alfabeto.push_back(std::string(1, character));
     }
   }
+
   alfabet_ = Alfabet(alfabeto);
 
   temp = "";
@@ -144,18 +147,18 @@ bool operator!=(const Chain& chain_1, const Chain& chain_2) {
 }
 
 bool operator<(const Chain& chain_1, const Chain& chain_2) {
-  std::vector<Chain> prefixes = chain_2.sub_chains();
+  std::vector<Chain> chains = chain_2.sub_chains();
 
-  for (auto const& prefix : prefixes) {
+  for (auto const& prefix : chains) {
     if (chain_1 == prefix) return true;
   }
   return false;
 }
 
 bool operator>(const Chain& chain_1, const Chain& chain_2) {
-  std::vector<Chain> prefixes = chain_1.sub_chains();
+  std::vector<Chain> chains = chain_1.sub_chains();
 
-  for (auto const& prefix : prefixes) {
+  for (auto const& prefix : chains) {
     if (chain_2 == prefix) return true;
   }
   return false;

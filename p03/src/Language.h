@@ -21,7 +21,14 @@ class Language {
  public:
   Language();
   Language(std::vector<Chain> raw_language);
+  /**
+   * @brief Returns the length of the language.
+   */
   int length() const;
+
+  /**
+   * @brief Operator to access individual chains of the language.
+   */
   const Chain& operator[](int index) const;
 
  private:
