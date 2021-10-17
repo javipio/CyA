@@ -27,3 +27,11 @@ Simbol::Simbol(std::string value) : value_(value){};
 Simbol::Simbol(char value) : value_(std::string(1, value)){};
 
 const std::string Simbol::get() const { return value_; };
+
+bool operator<(Simbol const& simbol_1, Simbol const& simbol_2) {
+  return simbol_1.get() < simbol_2.get();
+}
+
+bool operator>(Simbol const& simbol_1, Simbol const& simbol_2) {
+  return simbol_1.get() > simbol_2.get();
+}

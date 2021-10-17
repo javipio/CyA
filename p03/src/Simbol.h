@@ -31,3 +31,6 @@ class Simbol {
   std::string value_;
 };
 #endif
+
+bool operator<(Simbol const& simbol_1, Simbol const& simbol_2);
+bool operator>(Simbol const& simbol_1, Simbol const& simbol_2);

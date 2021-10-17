@@ -20,7 +20,7 @@
 
 Alfabet::Alfabet(std::vector<std::string> raw_alfabet) {
   for (const auto simbol : raw_alfabet) {
-    alfabet_.push_back(Simbol(simbol));
+    alfabet_.insert(Simbol(simbol));
   }
 }
 

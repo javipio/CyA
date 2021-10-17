@@ -17,6 +17,7 @@
  *                16/10/2021 - Creation (first version) of the code
  */
 
+#include <set>
 #include <vector>
 
 #include "Simbol.h"
@@ -34,6 +35,6 @@ class Alfabet {
   bool simbol_exists(const Simbol& needle);
 
  private:
-  std::vector<Simbol> alfabet_;
+  std::set<Simbol> alfabet_;
 };
 #endif

@@ -128,14 +128,16 @@ std::string Chain::to_string() const {
   return output_string;
 }
 
-Chain operator*(const Chain& chain_1, const Chain& chain_2) {
-  return Chain(chain_1.to_string() + chain_2.to_string());
-}
-
 Chain Chain::pow(int power) const {
-  if (!power) return Chain(EMPTY_CHAIN);
+  if (!power) return Chain("");
 
   return (*this) * pow(power - 1);
+}
+
+// OPERATORS
+
+Chain operator*(const Chain& chain_1, const Chain& chain_2) {
+  return Chain(chain_1.to_string() + chain_2.to_string());
 }
 
 bool operator==(const Chain& chain_1, const Chain& chain_2) {
