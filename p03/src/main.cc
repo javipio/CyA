@@ -22,6 +22,9 @@
 #include "Alfabet.h"
 #include "Language.h"
 
+/**
+ * @brief Reads from the input file and returns each line as a chain.
+ */
 std::vector<Chain> read_file(std::string filename) {
   std::ifstream input_file(filename);
   std::string line;
@@ -35,6 +38,9 @@ std::vector<Chain> read_file(std::string filename) {
   return chains;
 }
 
+/**
+ * @brief Writes to the output file taking into account the opcode given.
+ */
 void write_file(std::string output_filename, int opcode,
                 std::vector<Chain> chains) {
   std::ofstream output_file(output_filename);
