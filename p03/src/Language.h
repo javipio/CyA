@@ -22,7 +22,9 @@
 class Language {
  public:
   Language();
+  Language(std::string filename);
   Language(std::vector<Chain> raw_language);
+
   /**
    * @brief Returns the length of the language.
    */
@@ -37,6 +39,12 @@ class Language {
    * @brief Appends a chain to the end of the language.
    */
   void push_back(Chain chain);
+
+  /**
+   * @brief Writes to a file all the chains after being operated depending on
+   * the opcode.
+   */
+  void write_file(std::string output_filename, int opcode);
 
  private:
   std::vector<Chain> language_;
