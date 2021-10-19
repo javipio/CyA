@@ -22,8 +22,8 @@
 
 #include "Simbol.h"
 
-#ifndef ALFABET_H
-#define ALFABET_H
+#ifndef ALFABET_H_
+#define ALFABET_H_
 class Alfabet {
  public:
   Alfabet() {}

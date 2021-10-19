@@ -25,10 +25,10 @@
 /**
  * @brief Reads from the input file and returns each line as a chain.
  */
-std::vector<Chain> read_file(std::string filename) {
+Language read_file(std::string filename) {
   std::ifstream input_file(filename);
   std::string line;
-  std::vector<Chain> chains;
+  Language chains;
 
   while (std::getline(input_file, line)) {
     chains.push_back(Chain(line));
@@ -41,8 +41,7 @@ std::vector<Chain> read_file(std::string filename) {
 /**
  * @brief Writes to the output file taking into account the opcode given.
  */
-void write_file(std::string output_filename, int opcode,
-                std::vector<Chain> chains) {
+void write_file(std::string output_filename, int opcode, Language chains) {
   std::ofstream output_file(output_filename);
   std::string aux;
   int n;
@@ -57,50 +56,50 @@ void write_file(std::string output_filename, int opcode,
     std::cin >> n;
   }
 
-  for (const auto chain : chains) {
+  for (int i = 0; i < chains.length(); i++) {
     switch (opcode) {
       case 1:
-        output_file << std::to_string(chain.length()) << std::endl;
+        output_file << std::to_string(chains[i].length()) << std::endl;
         break;
       case 2:
-        output_file << chain.inverse() << std::endl;
+        output_file << chains[i].inverse() << std::endl;
         break;
       case 3:
-        output_file << Language(chain.prefixes()) << std::endl;
+        output_file << chains[i].prefixes() << std::endl;
         break;
       case 4:
-        output_file << Language(chain.sufixes()) << std::endl;
+        output_file << chains[i].sufixes() << std::endl;
         break;
       case 5:
-        output_file << Language(chain.sub_chains()) << std::endl;
+        output_file << chains[i].sub_chains() << std::endl;
         break;
       case 6: {
         const Chain auxiliar_chain = Chain(aux);
         std::string operador;
 
-        if (chain == auxiliar_chain) {
+        if (chains[i] == auxiliar_chain) {
           operador = " == ";
-        } else if (chain > auxiliar_chain) {
+        } else if (chains[i] > auxiliar_chain) {
           operador = " > ";
-        } else if (chain < auxiliar_chain) {
+        } else if (chains[i] < auxiliar_chain) {
           operador = " < ";
         } else {
           operador = " != ";
         }
 
-        output_file << chain << operador << auxiliar_chain << std::endl;
+        output_file << chains[i] << operador << auxiliar_chain << std::endl;
         break;
       }
       case 7: {
-        output_file << (chain * Chain(aux)) << std::endl;
+        output_file << (chains[i] * Chain(aux)) << std::endl;
         break;
       }
       case 8: {
-        output_file << chain.pow(n) << std::endl;
+        output_file << chains[i].pow(n) << std::endl;
         break;
       }
       default:
-        throw std::invalid_argument("Solo se aceptan OPCODES del 1 al ");
+        throw std::invalid_argument("Solo se aceptan OPCODES del 1 al 8");
     }
   }
   output_file.close();
@@ -116,7 +115,7 @@ int main(int argc, char* argv[]) {
   const std::string output_filename = argv[2];
   const int opcode = atoi(argv[3]);
 
-  std::vector<Chain> chains = read_file(input_filename);
+  Language chains = read_file(input_filename);
 
   write_file(output_filename, opcode, chains);
 

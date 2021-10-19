@@ -22,8 +22,16 @@
 #include "Alfabet.h"
 #include "Simbol.h"
 
-#ifndef CHAIN_H
-#define CHAIN_H
+#ifndef CHAIN_H_
+#define CHAIN_H_
+
+// Forward declaration so that Chain and language can import each other.
+#ifndef CHAIN_D_
+#define CHAIN_D_
+class Chain;
+#include "Language.h"
+#endif
+
 const char SPACE = ' ';
 const std::string COMMA = ",";
 
@@ -49,22 +57,25 @@ class Chain {
    */
   int length() const;
 
+  /**
+   * @brief Returns the string with the simbols in the inverted order.
+   */
   Chain inverse() const;
 
   /**
    * @brief Returns the prefixes of the chain.
    */
-  std::vector<Chain> prefixes() const;
+  Language prefixes() const;
 
   /**
    * @brief Returns the sufixes of the chain.
    */
-  std::vector<Chain> sufixes() const;
+  Language sufixes() const;
 
   /**
    * @brief Returns all the possible subchains of the chain.
    */
-  std::vector<Chain> sub_chains() const;
+  Language sub_chains() const;
 
   Chain pow(int power) const;
 
@@ -103,5 +114,8 @@ bool operator<(const Chain& chain_1, const Chain& chain_2);
  */
 bool operator>(const Chain& chain_1, const Chain& chain_2);
 
+/**
+ * @brief Operator to output the chain to an output stream.
+ */
 std::ostream& operator<<(std::ostream& output_stream, const Chain& chain);
 #endif

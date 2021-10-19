@@ -41,3 +41,5 @@ std::ostream& operator<<(std::ostream& output_stream,
   output_stream << "}";
   return output_stream;
 }
+
+void Language::push_back(Chain chain) { language_.push_back(chain); }

@@ -51,7 +51,7 @@ Chain::Chain(std::string line) {
   alfabet_ = Alfabet(alfabeto);
 
   temp = "";
-  for (const auto character : chain) {
+  for (const auto& character : chain) {
     temp += character;
     if (alfabet_.simbol_exists(Simbol(temp))) {
       cadena_.push_back(Simbol(temp));
@@ -84,8 +84,8 @@ Chain Chain::inverse() const {
   return inverted_string;
 }
 
-std::vector<Chain> Chain::prefixes() const {
-  std::vector<Chain> prefixes_;
+Language Chain::prefixes() const {
+  Language prefixes_;
   prefixes_.push_back(EMPTY_CHAIN);
 
   for (int i = 1; i <= length(); i++) {
@@ -95,8 +95,8 @@ std::vector<Chain> Chain::prefixes() const {
   return prefixes_;
 }
 
-std::vector<Chain> Chain::sufixes() const {
-  std::vector<Chain> sufixes_;
+Language Chain::sufixes() const {
+  Language sufixes_;
   sufixes_.push_back(EMPTY_CHAIN);
 
   for (int i = length() - 1; i >= 0; i--) {
@@ -106,8 +106,8 @@ std::vector<Chain> Chain::sufixes() const {
   return sufixes_;
 }
 
-std::vector<Chain> Chain::sub_chains() const {
-  std::vector<Chain> sub_chains_;
+Language Chain::sub_chains() const {
+  Language sub_chains_;
   sub_chains_.push_back(EMPTY_CHAIN);
 
   for (int i = 0; i < length(); i++) {
@@ -149,19 +149,19 @@ bool operator!=(const Chain& chain_1, const Chain& chain_2) {
 }
 
 bool operator<(const Chain& chain_1, const Chain& chain_2) {
-  std::vector<Chain> chains = chain_2.sub_chains();
+  Language chains = chain_2.sub_chains();
 
-  for (auto const& prefix : chains) {
-    if (chain_1 == prefix) return true;
+  for (int i = 0; i < chains.length(); i++) {
+    if (chain_1 == chains[i]) return true;
   }
   return false;
 }
 
 bool operator>(const Chain& chain_1, const Chain& chain_2) {
-  std::vector<Chain> chains = chain_1.sub_chains();
+  Language chains = chain_1.sub_chains();
 
-  for (auto const& prefix : chains) {
-    if (chain_2 == prefix) return true;
+  for (int i = 0; i < chains.length(); i++) {
+    if (chain_2 == chains[i]) return true;
   }
   return false;
 }

@@ -18,13 +18,17 @@
 
 #include <iostream>
 
-#ifndef SIMBOL_H
-#define SIMBOL_H
+#ifndef SIMBOL_H_
+#define SIMBOL_H_
 class Simbol {
  public:
   Simbol();
   Simbol(std::string value);
   Simbol(char value);
+
+  /**
+   * @brief Returns the value of the simbol.
+   */
   const std::string get() const;
 
  private:
@@ -32,5 +36,12 @@ class Simbol {
 };
 #endif
 
+/**
+ * @brief Operator to compare if simbol_1 is subchain of simbol_2.
+ */
 bool operator<(Simbol const& simbol_1, Simbol const& simbol_2);
+
+/**
+ * @brief Operator to compare if simbol_1 is subchain of simbol_2.
+ */
 bool operator>(Simbol const& simbol_1, Simbol const& simbol_2);

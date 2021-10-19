@@ -17,6 +17,8 @@
 
 #include "Chain.h"
 
+#ifndef LANGUAGE_H_
+#define LANGUAGE_H_
 class Language {
  public:
   Language();
@@ -31,8 +33,17 @@ class Language {
    */
   const Chain& operator[](int index) const;
 
+  /**
+   * @brief Appends a chain to the end of the language.
+   */
+  void push_back(Chain chain);
+
  private:
   std::vector<Chain> language_;
 };
 
+/**
+ * @brief Operator to output to a stream.
+ */
 std::ostream& operator<<(std::ostream& output_stream, const Language& language);
+#endif
