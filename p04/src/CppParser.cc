@@ -30,9 +30,11 @@ void CppParser::read() {
     has_main = false;
 
     if (std::regex_search(line, comment_start)) {
+      // A multiline comment has been detected, so the starting line index will
+      // be stored as well as the preceding lines.
       starting_line_number = line_number;
       lines_acumulated = line;
-      description_ = true;
+      if (line_number == 0) description_ = true;
     } else if (std::regex_search(line, comment_end) ||
                lines_acumulated.length() == 0) {
       // For every occurence that isn't multiline the starting line is reseted.
@@ -50,6 +52,8 @@ void CppParser::read() {
 
       lines_acumulated = "";
     } else if (lines_acumulated.length()) {
+      // Keep storing lines as the termination of the multiline comment hasn't
+      // been found yet.
       lines_acumulated += "\n" + line;
     }
 
@@ -74,7 +78,7 @@ void CppParser::write(std::string output_filename) {
 }
 
 bool CppParser::match_main_(std::string line) {
-  std::regex expression(R"(int main([^)]+))");
+  std::regex expression(R"(int main\(([^)]+)?\))");
   return std::regex_search(line, expression);
 }
 

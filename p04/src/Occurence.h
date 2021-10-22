@@ -18,6 +18,7 @@ class Occurence {
    * In case the starting_line and ending_line are equal, only one will be
    * displayed in the form:
    *     - [Line 0] info
+   * @return Parsed string with all the information.
    */
   std::string dump();
 
@@ -26,17 +27,20 @@ class Occurence {
   //=================
 
   /**
-   * @brief Returns the type of the occurence.
+   * @brief Simple type getter.
+   * @return The type of the occurence.
    */
   Type type();
 
   /**
-   * @brief Returns the info of the occurence.
+   * @brief Simple info getter.
+   * @return The info of the occurence.
    */
   std::string info();
 
   /**
-   * @brief Returns the ending_line of the occurence.
+   * @brief Simple ending_line getter.
+   * @return The ending_line of the occurence.
    */
   int ending_line();
 
@@ -45,13 +49,14 @@ class Occurence {
   //=================
 
   /**
-   * @brief Updates the value of type_ with the given parameter.
+   * @brief Simple type setter.
    * @param[in] type Future value for type_.
+   * @return None.
    */
   void set_type(Type type);
 
   /**
-   * @brief Updates the value of info_ with the given parameter.
+   * @brief Simple info setter.
    * @param[in] info Future value for info_.
    * @return None.
    */

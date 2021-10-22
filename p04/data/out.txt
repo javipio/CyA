@@ -21,12 +21,15 @@ DESCRIPTION:
  */
 
 VARIABLES:
-[Line 31] INT: factorial = 1
-[Line 44] INT: limit
+[Line 26] DOUBLE: cacaseca
+[Line 27] DOUBLE: toguapo = 526345
+[Line 33] INT: factorial = 1
+[Line 53] INT: limit
 
 STATEMENTS:
-[Line 32] LOOP: for
-[Line 46] LOOP: for
+[Line 34] LOOP: for
+[Line 55] LOOP: for
+[Line 58] LOOP: while
 
 MAIN:
 True
@@ -34,7 +37,16 @@ True
 COMMENTS:
 [Line 1-19] DESCRIPTION
 [Line 24] // Returns the factorial of the argument
-[Line 38-41] /*
+[Line 40-46
+] /**
+ *
+ * int hola = 3;
+ * // adios
+ * for(true)
+ * while(true)
+ */
+[Line 47-50
+] /*
  *
  * hola
  */

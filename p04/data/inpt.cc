@@ -23,6 +23,8 @@
 
 // Returns the factorial of the argument
 int Factorial(int number) {
+  double cacaseca;
+  double toguapo = 526345;
   switch (number) {
     case 0:
     case 1:
@@ -35,6 +37,13 @@ int Factorial(int number) {
       return factorial;
   }
 }
+/**
+ *
+ * int hola = 3;
+ * // adios
+ * for(true)
+ * while(true)
+ */
 /*
  *
  * hola
@@ -46,5 +55,7 @@ int main() {
   for (int i = 1; i <= limit; ++i) {
     std ::cout << i << "! = " << (double)Factorial(i) << std ::endl;
   }
+  while (true) {
+  };
   return 0;
 }
