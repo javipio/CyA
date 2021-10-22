@@ -36,17 +36,15 @@ True
 
 COMMENTS:
 [Line 1-19] DESCRIPTION
-[Line 24] // Returns the factorial of the argument
-[Line 40-46
-] /**
+[Line 40-46] /**
  *
  * int hola = 3;
  * // adios
  * for(true)
  * while(true)
  */
-[Line 47-50
-] /*
+[Line 47-50] /*
  *
  * hola
  */
+[Line 24] // Returns the factorial of the argument

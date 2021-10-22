@@ -1,13 +1,19 @@
+#include <fstream>
+
 #include "CppParser.h"
 
 int main(int argc, char* argv[]) {
-  std::string input_file = argv[1];
-  if (argc == 2 && (input_file == "--help" || input_file == "-h")) {
-    std::cout << "Usage: " << argv[0] << "SOURCE DEST\n";
-    std::cout << "Reads a '.cc' or '.cpp' file (SOURCE), extracts some useful "
-                 "information and stores it to DEST"
-              << std::endl;
-    return 0;
+  if (argc == 2) {
+    std::string input_file = argv[1];
+
+    if (input_file == "--help" || input_file == "-h") {
+      std::cout << "Usage: " << argv[0] << "SOURCE DEST\n";
+      std::cout
+          << "Reads a '.cc' or '.cpp' file (SOURCE), extracts some useful "
+             "information and stores it to DEST"
+          << std::endl;
+      return 0;
+    }
   }
 
   if (argc < 3) {
@@ -19,7 +25,10 @@ int main(int argc, char* argv[]) {
 
   CppParser parser(argv[1]);
   parser.read();
-  parser.write(argv[2]);
+
+  std::ofstream output_file(argv[2]);
+  parser.write(output_file);
+  output_file.close();
 
   return 0;
 }

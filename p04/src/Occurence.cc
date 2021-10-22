@@ -12,13 +12,13 @@ Occurence::Occurence(int starting_line, int ending_line, Occurence::Type type,
       type_(type),
       info_(info) {}
 
-Occurence::Type Occurence::type() { return type_; }
+Occurence::Type Occurence::type() const { return type_; }
 
-std::string Occurence::info() { return info_; }
+std::string Occurence::info() const { return info_; }
 
-int Occurence::ending_line() { return ending_line_; }
+int Occurence::ending_line() const { return ending_line_; }
 
-std::string Occurence::dump() {
+std::string Occurence::dump() const {
   std::string output = "[Line " + std::to_string(starting_line_);
 
   if (starting_line_ != ending_line_) {

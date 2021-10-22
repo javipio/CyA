@@ -5,7 +5,7 @@
 
 class Occurence {
  public:
-  enum Type { variable, statement, comment };
+  enum Type { variable, statement, comment, multiline_comment, noneType };
 
   Occurence();
   Occurence(int starting_line, int ending_line);
@@ -20,7 +20,7 @@ class Occurence {
    *     - [Line 0] info
    * @return Parsed string with all the information.
    */
-  std::string dump();
+  std::string dump() const;
 
   //=================
   // GETTERS
@@ -30,19 +30,19 @@ class Occurence {
    * @brief Simple type getter.
    * @return The type of the occurence.
    */
-  Type type();
+  Type type() const;
 
   /**
    * @brief Simple info getter.
    * @return The info of the occurence.
    */
-  std::string info();
+  std::string info() const;
 
   /**
    * @brief Simple ending_line getter.
    * @return The ending_line of the occurence.
    */
-  int ending_line();
+  int ending_line() const;
 
   //=================
   // SETTERS
