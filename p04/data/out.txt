@@ -47,3 +47,5 @@ COMMENTS:
  * hola
  */
 [Line 24] // Returns the factorial of the argument
+[Line 21] INCLUDE: cassert
+[Line 22] INCLUDE: iostream

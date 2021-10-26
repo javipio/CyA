@@ -28,9 +28,11 @@ std::string kVariablesLabel = "\nVARIABLES:\n";
 std::string kStatementsLabel = "\nSTATEMENTS:\n";
 std::string kMainLabel = "\nMAIN:\n";
 std::string kCommentsLabel = "\nCOMMENTS:\n";
+std::string kInclude = "INCLUDE: ";
+std::string kLoop = "LOOP: ";
 
 CppParser::CppParser(std::string filename) : filename_(filename) {
-  occurences_.reserve(4);
+  occurences_.reserve(5);
 };
 
 void CppParser::read() {
@@ -92,6 +94,7 @@ Occurence::Type CppParser::match_(std::string line) const {
   std::regex while_loop(R"(while \([^)]+\))");
   std::regex single_line_comment(R"(\/\/.*)");
   std::regex multi_line_comment(R"(\/\*)");
+  std::regex include(R"(^(#include [<"][^>"]+[">]))");
 
   if (std::regex_search(line, multi_line_comment)) {
     return Occurence::Type::multiline_comment;
@@ -103,6 +106,8 @@ Occurence::Type CppParser::match_(std::string line) const {
     return Occurence::Type::statement;
   } else if (std::regex_search(line, single_line_comment)) {
     return Occurence::Type::comment;
+  } else if (std::regex_search(line, include)) {
+    return Occurence::Type::include;
   }
 
   return Occurence::Type::noneType;
@@ -121,9 +126,8 @@ std::string CppParser::extract_info(std::string line,
       // The definition or instantiation is also extracted, and appended to the
       // type.
       std::regex regex(R"(([ ]*?((int)|double) )|;)");
-      std::string info = to_upper_case_(var_type[0].str()) + ": " +
-                         std::regex_replace(line, regex, "");
-      return info;
+      return to_upper_case_(var_type[0].str()) + ": " +
+             std::regex_replace(line, regex, "");
     }
     case Occurence::Type::comment:
       return line.substr(line.find("//"));
@@ -131,12 +135,16 @@ std::string CppParser::extract_info(std::string line,
       return line;
     case Occurence::Type::statement: {
       if (line.find("while") != std::string::npos) {
-        return "LOOP: while";
+        return kLoop + "while";
       }
-      return "LOOP: for";
+      return kLoop + "for";
+    }
+    case Occurence::Type::include: {
+      std::regex header_file(R"(^((#include) )|[<>"])");
+      return kInclude + std::regex_replace(line, header_file, "");
     }
     default:
-      throw std::invalid_argument("WTF");
+      throw std::invalid_argument("PANIC");
   }
 }
 
@@ -155,7 +163,8 @@ void CppParser::write(std::ostream& output_stream) const {
   output_stream << kMainLabel << (main_ ? "True" : "False") << std::endl;
   output_stream << kCommentsLabel
                 << dump_occurences_(Occurence::Type::multiline_comment)
-                << dump_occurences_(Occurence::Type::comment);
+                << dump_occurences_(Occurence::Type::comment)
+                << dump_occurences_(Occurence::Type::include);
 }
 
 std::string CppParser::dump_occurences_(Occurence::Type type) const {

@@ -91,9 +91,11 @@ class CppParser {
   std::vector<std::vector<Occurence>> occurences_;
   /**
    * occurences_ positions:
-   *     - Occurence::Type::variable(0) -> variables
-   *     - Occurence::Type::statements(1) -> statements
-   *     - Occurence::Type::comments(2) -> comments
+   *     - Occurence::Type::variable[0] -> variables
+   *     - Occurence::Type::statements[1] -> statements
+   *     - Occurence::Type::comments[2] -> comments
+   *     - Occurence::Type::comments multiline[3] -> comments
+   *     - Occurence::Type::include[4] -> comments
    */
   bool main_;
 };

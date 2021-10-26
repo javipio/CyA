@@ -24,7 +24,14 @@
 
 class Occurence {
  public:
-  enum Type { variable, statement, comment, multiline_comment, noneType };
+  enum Type {
+    variable,
+    statement,
+    comment,
+    multiline_comment,
+    include,
+    noneType
+  };
 
   Occurence();
   Occurence(int starting_line, int ending_line);
