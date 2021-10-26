@@ -21,29 +21,28 @@ DESCRIPTION:
  */
 
 VARIABLES:
-[Line 26] DOUBLE: cacaseca
-[Line 27] DOUBLE: toguapo = 526345
-[Line 33] INT: factorial = 1
-[Line 53] INT: limit
+[Line 26] DOUBLE: doubleprueba = 526345
+[Line 32] INT: factorial = 1
+[Line 52] INT: limit
 
 STATEMENTS:
-[Line 34] LOOP: for
-[Line 55] LOOP: for
-[Line 58] LOOP: while
+[Line 33] LOOP: for
+[Line 54] LOOP: for
+[Line 57] LOOP: while
 
 MAIN:
 True
 
 COMMENTS:
 [Line 1-19] DESCRIPTION
-[Line 40-46] /**
+[Line 39-45] /**
  *
  * int hola = 3;
  * // adios
  * for(true)
  * while(true)
  */
-[Line 47-50] /*
+[Line 46-49] /*
  *
  * hola
  */

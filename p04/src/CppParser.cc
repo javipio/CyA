@@ -1,3 +1,22 @@
+/**
+ * @author Javier Padilla Pío
+ * @date 23/10/2021
+ * University of La Laguna
+ * Higher School of Engineering and Technology
+ * Computer Ingineering Degree
+ * Grade: 2nd
+ * Practice 4 - Expresiones regulares.
+ * Email: alu0101410463@ull.edu.es
+ * CppParser.cc file: CppParser class is in charge of ingesting a *.cc file and
+ *                    storing it's valuable information for further dump. This
+ *                    file contains the implementation.
+ * References:
+ *                Practice statement:
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20389/mod_assign/introattachment/0/CyA_2021_2022_P04_ExpresionesRegulares.pdf?forcedownload=1
+ * Revision history:
+ *                23/10/2021 - Creation (first version) of the code
+ */
+
 #include "CppParser.h"
 
 #include <fstream>
@@ -62,24 +81,6 @@ void CppParser::read() {
   }
 }
 
-void CppParser::write(std::ostream& output_stream) const {
-  output_stream << kProgramNameLabel << filename_ << std::endl;
-
-  if (description_) {
-    const auto kDescription = occurences_[Occurence::Type::multiline_comment];
-    output_stream << kDescriptionLabel << kDescription[0].info() << std::endl;
-  }
-
-  output_stream << kVariablesLabel
-                << dump_occurences_(Occurence::Type::variable);
-  output_stream << kStatementsLabel
-                << dump_occurences_(Occurence::Type::statement);
-  output_stream << kMainLabel << (main_ ? "True" : "False") << std::endl;
-  output_stream << kCommentsLabel
-                << dump_occurences_(Occurence::Type::multiline_comment)
-                << dump_occurences_(Occurence::Type::comment);
-}
-
 bool CppParser::match_main_(std::string line) const {
   std::regex expression(R"(int main\(([^)]+)?\))");
   return std::regex_search(line, expression);
@@ -139,6 +140,24 @@ std::string CppParser::extract_info(std::string line,
   }
 }
 
+void CppParser::write(std::ostream& output_stream) const {
+  output_stream << kProgramNameLabel << filename_ << std::endl;
+
+  if (description_) {
+    const auto kDescription = occurences_[Occurence::Type::multiline_comment];
+    output_stream << kDescriptionLabel << kDescription[0].info() << std::endl;
+  }
+
+  output_stream << kVariablesLabel
+                << dump_occurences_(Occurence::Type::variable);
+  output_stream << kStatementsLabel
+                << dump_occurences_(Occurence::Type::statement);
+  output_stream << kMainLabel << (main_ ? "True" : "False") << std::endl;
+  output_stream << kCommentsLabel
+                << dump_occurences_(Occurence::Type::multiline_comment)
+                << dump_occurences_(Occurence::Type::comment);
+}
+
 std::string CppParser::dump_occurences_(Occurence::Type type) const {
   std::string output;
 
@@ -165,4 +184,8 @@ std::string CppParser::to_upper_case_(std::string string) const {
   }
 
   return output;
+}
+
+int CppParser::count_occurences_(Occurence::Type type) const {
+  return occurences_[type].size();
 }

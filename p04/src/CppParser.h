@@ -1,3 +1,21 @@
+/**
+ * @author Javier Padilla Pío
+ * @date 23/10/2021
+ * University of La Laguna
+ * Higher School of Engineering and Technology
+ * Computer Ingineering Degree
+ * Grade: 2nd
+ * Practice 4 - Expresiones regulares.
+ * Email: alu0101410463@ull.edu.es
+ * CppParser.h file: CppParser class is in charge of ingesting a *.cc file and
+ *                   storing it's valuable information for further dump. This
+ *                   file contains the interface of the class.
+ * References: Practice statement:
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20389/mod_assign/introattachment/0/CyA_2021_2022_P04_ExpresionesRegulares.pdf?forcedownload=1
+ * Revision history:
+ *                23/10/2021 - Creation (first version) of the code
+ */
+
 #include <iostream>
 #include <regex>
 #include <vector>
@@ -62,11 +80,11 @@ class CppParser {
    */
   std::string to_upper_case_(std::string string) const;
 
-  int variables_length() const;
-
-  int statements_length() const;
-
-  int comments_length() const;
+  /**
+   * @brief Counts the number of occurences of a given type.
+   * @return number of occurences.
+   */
+  int count_occurences_(Occurence::Type type) const;
 
   std::string filename_;
   bool description_;

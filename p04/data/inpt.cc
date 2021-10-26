@@ -23,8 +23,7 @@
 
 // Returns the factorial of the argument
 int Factorial(int number) {
-  double cacaseca;
-  double toguapo = 526345;
+  double doubleprueba = 526345;
   switch (number) {
     case 0:
     case 1:
