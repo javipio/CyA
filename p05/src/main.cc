@@ -1,3 +1,19 @@
+/**
+ * @author Javier Padilla Pío
+ * @date 29/10/2021
+ * University of La Laguna
+ * Higher School of Engineering and Technology
+ * Computer Ingineering Degree
+ * Grade: 2nd
+ * Practice 3 - Operaciones con cadenas y lenguajes.
+ * Email: alu0101410463@ull.edu.es
+ * main.cc: Entrypoint for the program.
+ * References:
+ *                Practice statement:
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20878/mod_assign/introattachment/0/CyA_2021_2022_P05_DFAsPatrones.pdf?forcedownload=1
+ * Revision history:
+ *                29/10/2021 - Creation (first version) of the code
+ */
 
 #include <fstream>
 #include <iostream>
