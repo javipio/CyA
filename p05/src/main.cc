@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
 
   Dfa dfa(input_file);
   input_file.close();
-  dfa.run(pattern);
+  dfa.subsequences(pattern);
 
   std::ofstream output_file(output_filename);
   output_file << dfa.dump();

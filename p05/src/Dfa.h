@@ -18,8 +18,8 @@
  */
 
 #include <fstream>
-#include <map>
 #include <set>
+#include <unordered_map>
 #include <vector>
 
 #include "Chain.h"
@@ -30,6 +30,8 @@
 const char kComma = ',';
 const char kColon = ':';
 const char kBreakLine = '\n';
+const Chain kAccepted(": Accepted");
+const Chain kDenied(": Denied");
 
 class Dfa {
  public:
@@ -44,7 +46,7 @@ class Dfa {
   /**
    * @brief Runs the DFA and stores the output on subsequences_.
    */
-  void run(Chain chain);
+  void subsequences(Chain chain);
 
   /**
    * @brief Returns all the occurences after runing the DFA.
@@ -52,10 +54,11 @@ class Dfa {
   std::string dump() const;
 
  private:
-  std::map<std::string, State> states_;
-  std::map<std::string, std::string> transitions_;
   Alphabet alphabet_;
   State initial_state_;
+  std::unordered_map<std::string, State> states_;
+  std::set<std::string> final_states_;
+  std::unordered_map<std::string, std::string> transitions_;
   std::set<Chain> subsequences_;
 
   /**

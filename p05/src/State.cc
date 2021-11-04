@@ -2,10 +2,7 @@
 
 State::State() = default;
 
-State::State(std::string id, bool acceptance)
-    : id_(id), acceptance_(acceptance){};
-
-bool State::acceptance() const { return acceptance_; }
+State::State(std::string id) : id_(id){};
 
 std::string State::id() const { return id_; }
 

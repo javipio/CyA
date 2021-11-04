@@ -23,13 +23,7 @@
 class State {
  public:
   State();
-  State(std::string id, bool acceptance);
-
-  /**
-   * @brief Simple getter
-   * @return Returns the acceptance of the state.
-   */
-  bool acceptance() const;
+  State(std::string id);
 
   /**
    * @brief Simple getter
@@ -38,7 +32,6 @@ class State {
   std::string id() const;
 
  private:
-  bool acceptance_;
   std::string id_;
 };
 

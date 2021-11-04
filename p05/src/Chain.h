@@ -132,6 +132,8 @@ bool operator<(const Chain& chain_1, const Chain& chain_2);
  */
 bool operator>(const Chain& chain_1, const Chain& chain_2);
 
+Chain operator+(const Chain& chain_1, const Chain& chain_2);
+
 /**
  * @brief Operator to compare if chain_2 previous in alphabetic order than
  * chain_1.

@@ -35,7 +35,6 @@ void Dfa::read(std::ifstream& input_file) {
 
   std::string line;
   std::set<State> states;
-  std::set<std::string> acceptance_states_ids;
 
   // Load the alphabet.
   while (getline(input_file, line) && line.length()) {
@@ -44,14 +43,14 @@ void Dfa::read(std::ifstream& input_file) {
 
   // Load the initial state
   getline(input_file, line);
-  initial_state_ = State(line, false);
+  initial_state_ = State(line);
 
   // Skips the line after the initial state definition.
   getline(input_file, line);
 
   // Reads all the transitions.
   while (getline(input_file, line) && line.length()) {
-    acceptance_states_ids.insert(line);
+    final_states_.insert(line);
   }
 
   while (getline(input_file, line)) {
@@ -86,13 +85,9 @@ void Dfa::read(std::ifstream& input_file) {
     }
 
     if (future_id.length() && id.length()) {
-      bool future_acceptance =
-          acceptance_states_ids.find(future_id) != acceptance_states_ids.end();
-      bool actual_acceptance =
-          acceptance_states_ids.find(id) != acceptance_states_ids.end();
+      states.insert(State(future_id));
+      states.insert(State(id));
 
-      states.insert(State(future_id, future_acceptance));
-      states.insert(State(id, actual_acceptance));
       transitions_.insert(
           std::pair<std::string, std::string>(id + entry, future_id));
     }
@@ -103,7 +98,7 @@ void Dfa::read(std::ifstream& input_file) {
   }
 }
 
-void Dfa::run(Chain chain) {
+void Dfa::subsequences(Chain chain) {
   if (!alphabet_.contains(chain.alphabet())) {
     throw std::invalid_argument(
         "El alfabeto de la cadena a procesar no pertenece al de la definición "
@@ -123,9 +118,12 @@ void Dfa::run(Chain chain) {
         starting_position = j;
       }
 
-      if (actual_state.acceptance()) {
+      if (final_states_.find(actual_state.id()) != final_states_.end()) {
         subsequences_.insert(
-            chain.substr(starting_position, j - starting_position + 1));
+            chain.substr(starting_position, j - starting_position + 1) + kAccepted);
+      } else {
+        subsequences_.insert(
+            chain.substr(starting_position, j - starting_position + 1) + kDenied);
       }
 
       j++;

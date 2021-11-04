@@ -31,7 +31,7 @@ Chain::Chain(std::string line) {
   std::string temp;
   std::string chain;
 
-  for (const auto& character : line) {
+  /*for (const auto& character : line) {
     if (character == SPACE) {
       alphabeto.push_back(temp);
       temp = "";
@@ -40,10 +40,10 @@ Chain::Chain(std::string line) {
     }
   }
 
-  chain = temp;
+  chain = temp;*/
   // If there is no alphabet it will be extracted from the chain.
   if (alphabeto.size() == 0) {
-    for (const auto& character : temp) {
+    for (const auto& character : line) {
       alphabeto.push_back(std::string(1, character));
     }
   }
@@ -51,7 +51,7 @@ Chain::Chain(std::string line) {
   alphabet_ = Alphabet(alphabeto);
 
   temp = "";
-  for (const auto& character : chain) {
+  for (const auto& character : line) {
     temp += character;
     if (alphabet_.symbol_exists(Symbol(temp))) {
       cadena_.push_back(Symbol(temp));
@@ -163,3 +163,7 @@ std::ostream& operator<<(std::ostream& output_stream, const Chain& chain) {
 }
 
 Symbol Chain::operator[](int index) { return cadena_[index]; };
+
+Chain operator+(const Chain& chain_1, const Chain& chain_2) {
+  return chain_1.to_string() + chain_2.to_string();
+}
