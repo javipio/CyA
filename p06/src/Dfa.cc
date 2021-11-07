@@ -12,7 +12,7 @@
  *              This file contains the implementation of the class.
  * References:
  *                Practice statement:
- *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20878/mod_assign/introattachment/0/CyA_2021_2022_P05_DFAsPatrones.pdf?forcedownload=1
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/21198/mod_assign/introattachment/0/CyA_2021_2022_P06_DFA_Simulacion.pdf?forcedownload=1
  * Revision history:
  *                29/10/2021 - Creation (first version) of the code
  */
@@ -21,15 +21,7 @@
 
 Dfa::Dfa() = default;
 
-Dfa::Dfa(std::istream& input_file) { read(input_file); };
-
-void Dfa::reset_() {
-  states_.clear();
-  transitions_.clear();
-  alphabet_ = Alphabet();
-}
-
-void Dfa::read(std::istream& input_file) {
+Dfa::Dfa(std::istream& input_file) {
   std::string line;
   getline(input_file, line);
   int cardinality = std::stoi(line);
@@ -43,9 +35,8 @@ void Dfa::read(std::istream& input_file) {
     std::string raw_entry;
     std::string future_id;
 
-    int transitions = 0;
-    bool reading_entry = true;
     bool reading_id = true;
+    bool reading_entry = true;
     bool reading_transitions_n = false;
     bool reading_transitions = false;
     int j = 0;
@@ -72,8 +63,6 @@ void Dfa::read(std::istream& input_file) {
         if (character == kSpace) {
           reading_transitions_n = false;
           reading_transitions = true;
-        } else {
-          transitions += character - '0';
         }
       } else {
         if (character != kSpace) {
@@ -86,14 +75,12 @@ void Dfa::read(std::istream& input_file) {
 
         if (character == kSpace || j == line.length() - 1) {
           if (!reading_entry) {
-            // std::cout << id + raw_entry << " -> " << future_id << std::endl;
             transitions_.insert(TransitionPair(id + raw_entry, future_id));
             states_.insert(StatePair(future_id, State(future_id)));
             alphabet_.insert(raw_entry);
 
             raw_entry = "";
             future_id = "";
-            transitions--;
           }
           reading_entry = !reading_entry;
         }
@@ -105,19 +92,12 @@ void Dfa::read(std::istream& input_file) {
   }
 
   if (getline(input_file, line) || i + 1 < cardinality) {
-    std::cout << line << std::endl;
     throw std::invalid_argument(
         "Parsing error, the sintax of the .dfa file is not correct.");
   }
 }
 
 bool Dfa::run(Chain chain) {
-  if (!alphabet_.contains(chain.alphabet())) {
-    throw std::invalid_argument(
-        "El alfabeto de la cadena a procesar no pertenece al de la definición "
-        "del DFA.");
-  }
-
   State actual_state = states_[initial_state_id_];
   State prev_state = states_[initial_state_id_];
   int starting_position;

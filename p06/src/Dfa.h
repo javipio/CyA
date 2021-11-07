@@ -12,7 +12,7 @@
  *              This file contains the interface of the class.
  * References:
  *                Practice statement:
- *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20878/mod_assign/introattachment/0/CyA_2021_2022_P05_DFAsPatrones.pdf?forcedownload=1
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/21198/mod_assign/introattachment/0/CyA_2021_2022_P06_DFA_Simulacion.pdf?forcedownload=1
  * Revision history:
  *                29/10/2021 - Creation (first version) of the code
  */
@@ -40,11 +40,6 @@ class Dfa {
   Dfa(std::istream& input_file);
 
   /**
-   * @brief Reads formal definition froma stream.
-   */
-  void read(std::istream& input_file);
-
-  /**
    * @brief Runs the DFA and stores the output on subsequences_.
    */
   bool run(Chain chain);
@@ -52,6 +47,7 @@ class Dfa {
  private:
   typedef std::pair<std::string, std::string> TransitionPair;
   typedef std::pair<std::string, State> StatePair;
+
   Alphabet alphabet_;
   std::string initial_state_id_;
   std::unordered_map<std::string, State> states_;
@@ -64,10 +60,5 @@ class Dfa {
    * @param[in] entry Current symbol of the chain.
    */
   const State& transit_state_(State actual_state, Symbol entry) const;
-
-  /**
-   * @brief Cleans all data structures inside the DFA.
-   */
-  void reset_();
 };
 #endif

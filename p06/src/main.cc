@@ -5,12 +5,12 @@
  * Higher School of Engineering and Technology
  * Computer Ingineering Degree
  * Grade: 2nd
- * Practice 3 - Operaciones con cadenas y lenguajes.
+ * Practice 6 - Simulación de DFAs
  * Email: alu0101410463@ull.edu.es
  * main.cc: Entrypoint for the program.
  * References:
  *                Practice statement:
- *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20878/mod_assign/introattachment/0/CyA_2021_2022_P05_DFAsPatrones.pdf?forcedownload=1
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/21198/mod_assign/introattachment/0/CyA_2021_2022_P06_DFA_Simulacion.pdf?forcedownload=1
  * Revision history:
  *                29/10/2021 - Creation (first version) of the code
  */
@@ -25,10 +25,11 @@ int main(int argc, char* argv[]) {
 
     if (input_file == "--help" || input_file == "-h") {
       std::cout << "Usage: " << argv[0] << "DEFINITION CHAINS_FILE DEST\n";
-      std::cout << "Reads a file containing the formal definition of the DFA "
-                   "from DEFINITION, then cheks for subsequences in CHAIN and "
-                   "stores them in DEST"
-                << std::endl;
+      std::cout
+          << "Reads a file containing the formal definition of the DFA "
+             "from DEFINITION, then checks for subsequences in CHAINS_FILE and "
+             "stores them in DEST"
+          << std::endl;
       return 0;
     }
   }
@@ -46,7 +47,15 @@ int main(int argc, char* argv[]) {
   std::ifstream input_file(input_filename);
   std::string chain;
 
-  Dfa dfa(input_file);
+  Dfa dfa;
+
+  try {
+    dfa = Dfa(input_file);
+  } catch (std::invalid_argument err) {
+    std::cerr << "El archivo de transiciones contiene fallos de sintaxis"
+              << std::endl;
+  };
+
   input_file.close();
 
   std::ifstream chains_file(chains_filename);

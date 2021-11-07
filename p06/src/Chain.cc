@@ -11,7 +11,7 @@
  *                 This file contains the implementation of the class.
  * References:
  *                Practice statement:
- *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/20878/mod_assign/introattachment/0/CyA_2021_2022_P05_DFAsPatrones.pdf?forcedownload=1
+ *                https://campusingenieriaytecnologia2122.ull.es/pluginfile.php/21198/mod_assign/introattachment/0/CyA_2021_2022_P06_DFA_Simulacion.pdf?forcedownload=1
  * Revision history:
  *                29/10/2021 - Creation (first version) of the code
  */
