@@ -56,7 +56,7 @@ Dfa::Dfa(std::istream& input_file) {
           reading_transitions_n = true;
         }
 
-        if (character == '1') {
+        if (character == kIsFinalIdentifier) {
           final_states_.insert(id);
         }
       } else if (reading_transitions_n) {
@@ -82,9 +82,11 @@ Dfa::Dfa(std::istream& input_file) {
             raw_entry = "";
             future_id = "";
           }
+
           reading_entry = !reading_entry;
         }
       }
+
       j++;
     }
 
@@ -99,23 +101,13 @@ Dfa::Dfa(std::istream& input_file) {
 
 bool Dfa::run(Chain chain) {
   State actual_state = states_[initial_state_id_];
-  State prev_state = states_[initial_state_id_];
-  int starting_position;
 
-  int j = 0;
-  while (j < chain.length()) {
-    actual_state = transit_state_(actual_state, chain[j]);
+  for (const auto& symbol : chain) {
+    actual_state = transit_state_(actual_state, symbol);
+  }
 
-    if (prev_state != actual_state && prev_state == initial_state_id_) {
-      starting_position = j;
-    }
-
-    if (final_states_.find(actual_state.id()) != final_states_.end()) {
-      return true;
-    }
-
-    j++;
-    prev_state = actual_state;
+  if (final_states_.find(actual_state.id()) != final_states_.end()) {
+    return true;
   }
 
   return false;

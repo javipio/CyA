@@ -128,6 +128,12 @@ Chain Chain::pow(int power) const {
 
 Alphabet Chain::alphabet() const { return alphabet_; }
 
+std::vector<Symbol>::const_iterator Chain::begin() const {
+  return chain_.begin();
+}
+
+std::vector<Symbol>::const_iterator Chain::end() const { return chain_.end(); }
+
 // OPERATORS
 
 Chain operator*(const Chain& chain_1, const Chain& chain_2) {

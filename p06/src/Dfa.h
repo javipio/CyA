@@ -5,7 +5,7 @@
  * Higher School of Engineering and Technology
  * Computer Ingineering Degree
  * Grade: 2nd
- * Practice 3 - Operaciones con cadenas y lenguajes.
+ * Practice 5 - Operaciones con cadenas y lenguajes.
  * Email: alu0101410463@ull.edu.es
  * Dfa.cc file: Dfa class contains all the logic to execute a DFA given a formal
  *              definition file and a chain.
@@ -27,10 +27,9 @@
 
 #ifndef NFA_H_
 #define NFA_H_
-const char kComma = ',';
-const char kColon = ':';
 const char kBreakLine = '\n';
 const char kSpace = ' ';
+const char kIsFinalIdentifier = '1';
 const Chain kAccepted(": Accepted");
 const Chain kDenied(": Denied");
 
@@ -40,7 +39,7 @@ class Dfa {
   Dfa(std::istream& input_file);
 
   /**
-   * @brief Runs the DFA and stores the output on subsequences_.
+   * @brief Runs the DFA on a given chain.
    */
   bool run(Chain chain);
 

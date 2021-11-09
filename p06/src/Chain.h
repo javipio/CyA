@@ -101,6 +101,10 @@ class Chain {
    */
   Alphabet alphabet() const;
 
+  std::vector<Symbol>::const_iterator begin() const;
+
+  std::vector<Symbol>::const_iterator end() const;
+
  private:
   std::vector<Symbol> chain_;
   Alphabet alphabet_;
