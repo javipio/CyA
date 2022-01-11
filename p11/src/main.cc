@@ -5,6 +5,8 @@
 
 int main(int argc, char* argv[]) {
   if (argc < 3) {
+    std::cerr << "./kp - Implementación del algoritmo de la mochila" << std::endl;
+    std::cerr << "Modo de uso: ./kp [, -u] peso fichero_entrada.txt" << std::endl;
     return 1;
   }
 

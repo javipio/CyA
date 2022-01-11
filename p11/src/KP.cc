@@ -6,8 +6,7 @@ KP::KP(float max_weight, std::ifstream& input_file) : max_weight_(max_weight) {
   int i = 1;
   while (getline(input_file, line)) {
     auto splited_line = Split(line, " ");
-    items_.push_back(
-        Item(std::stoi(splited_line[0]), std::stoi(splited_line[1]), i++));
+    items_.push_back(Item(std::stoi(splited_line[0]), std::stoi(splited_line[1]), i++));
   }
 
   auto custom_sort = [](const Item lhs, const Item rhs) { return lhs > rhs; };
@@ -23,7 +22,7 @@ std::tuple<float, float> KP::SolveBounded() const {
   for (int i = 0; i < items_.size() && current_weight < max_weight_; i++) {
     float factor = 1;
     if (current_weight + items_[i].weight() > max_weight_) {
-      factor = (float)(max_weight_ - current_weight) / items_[i].weight();
+      factor = static_cast<float>(max_weight_ - current_weight) / items_[i].weight();
     }
     current_weight += items_[i].weight() * factor;
     revenue += items_[i].value() * factor;
@@ -61,8 +60,7 @@ std::tuple<float, float> KP::SolveUnBounded() const {
   return std::make_tuple(revenue, current_weight);
 }
 
-std::vector<std::string> KP::Split(const std::string& chain,
-                                   std::string seperator) const {
+std::vector<std::string> KP::Split(const std::string& chain, std::string seperator) const {
   std::vector<std::string> output;
   size_t prev_pos = 0, pos = 0;
 
@@ -78,8 +76,7 @@ std::vector<std::string> KP::Split(const std::string& chain,
   return output;
 }
 
-void KP::PrintOutput(float revenue, float weight,
-                     pair_vector<int, float> steps) const {
+void KP::PrintOutput(float revenue, float weight, pair_vector<int, float> steps) const {
   std::cout << "Beneficio: " << revenue << std::endl;
   std::cout << "Peso: " << weight << std::endl;
   std::cout << "Solución: ";

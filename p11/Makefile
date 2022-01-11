@@ -17,7 +17,7 @@ BINDIR   = bin
 SRC_FILES  := $(patsubst $(SRCDIR)/%.cc, $(BINDIR)/%.o, $(wildcard $(SRCDIR)/*.cc))
 
 $(PROGNAME): $(SRC_FILES)
-  @mkdir $(BINDIR)
+	@mkdir -p $(BINDIR)
 	@echo $(SRC_FILES)
 	@$(LINKER) $(SRC_FILES) $(LFLAGS) -o $(BINDIR)/$@
 	@echo "Linking complete!"
